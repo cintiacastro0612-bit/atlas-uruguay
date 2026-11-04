@@ -57,6 +57,7 @@
   <header>
     <h1 id="ttl">Atlas electoral de Uruguay</h1>
     <span class="sub" id="elLabel">—</span>
+    <select id="elSel" style="display:none;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:13.5px;background:#fff;color:var(--ink)"></select>
     <span class="demo" id="demoTag" style="display:none">DEMO · datos de ejemplo</span>
   </header>
 
@@ -136,13 +137,14 @@ function partidoById(id){ return partidos().find(function(p){return p.id===id;})
 function depData(name){ return (ELECCION.departamentos||{})[name]||null; }
 function derive(name){
   var d=depData(name); if(!d) return null;
-  var votos=d.votos||{}, emitidos=0;
-  partidos().forEach(function(p){ emitidos+=Number(votos[p.id]||0); });
+  var votos=d.votos||{}, validos=0;
+  partidos().forEach(function(p){ validos+=Number(votos[p.id]||0); });
+  var emitidos = d.emitidos!=null ? Number(d.emitidos) : validos; // oficial si viene en el dato
   var ganador=null, max=-1;
   partidos().forEach(function(p){ var v=Number(votos[p.id]||0); if(v>max){max=v;ganador=p.id;} });
-  var pctByP={}; partidos().forEach(function(p){ pctByP[p.id]= emitidos? (Number(votos[p.id]||0)/emitidos*100):0; });
+  var pctByP={}; partidos().forEach(function(p){ pctByP[p.id]= validos? (Number(votos[p.id]||0)/validos*100):0; });
   var participacion = d.habilitados? (emitidos/d.habilitados*100):null;
-  return {votos:votos,emitidos:emitidos,ganador:ganador,pct:pctByP,participacion:participacion,habilitados:d.habilitados};
+  return {votos:votos,emitidos:emitidos,validos:validos,blancos:d.blancos,anulados:d.anulados,ganador:ganador,pct:pctByP,participacion:participacion,habilitados:d.habilitados};
 }
 
 // ───────────────── Color ─────────────────
@@ -219,7 +221,9 @@ function showFicha(name){
   $("ficha").innerHTML='<h3>'+esc(name)+'</h3>'+
     '<div class="win"><span class="sw" style="background:'+pg.color+'"></span>Ganó '+esc(pg.nombre)+'</div>'+
     '<div class="rows">'+rows+'</div>'+
-    '<div class="meta">Votos emitidos: <b>'+fmt(d.emitidos)+'</b><br>'+
+    '<div class="meta">Votos a lemas: <b>'+fmt(d.validos)+'</b> (los % son sobre este total)<br>'+
+    (d.blancos!=null?'En blanco: '+fmt(d.blancos)+' · Anulados: '+fmt(d.anulados)+'<br>':'')+
+    'Votos emitidos: <b>'+fmt(d.emitidos)+'</b><br>'+
     'Habilitados: '+fmt(d.habilitados)+(d.participacion!=null?' · Participación: <b>'+pct(d.participacion)+'</b>':'')+'</div>';
 }
 function renderLegend(){
@@ -263,18 +267,30 @@ $("dlPng").onclick=function(){
   img.src="data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(svgString())));
 };
 
+// ───────────────── Elección activa ─────────────────
+function setEleccion(i){
+  ELECCION=DATA.elecciones[i]; MODE="ganador"; SELECTED=null;
+  history.replaceState(null,"","#"+ELECCION.id);
+  $("elLabel").textContent=DATA.elecciones.length>1?"":(ELECCION.label||"");
+  $("demoTag").style.display=ELECCION.demo?"inline-block":"none";
+  $("src").innerHTML="Fuente: "+esc(ELECCION.fuente||"")+"<br>Mapa base: ECharts (uruguay.geo.json).";
+  $("ficha").innerHTML='<h3>Pasá el mouse por un departamento</h3><div class="dim">o tocalo en el celular</div>';
+  renderTabs(); renderMap(); renderLegend();
+}
+
 // ───────────────── Init ─────────────────
 async function init(){
   try{
     try{ GEO=await getJSON(GEO_LOCAL); }catch(e){ GEO=await getJSON(GEO_REMOTE); }
     DATA=await getJSON(DATA_URL);
-    ELECCION=DATA.elecciones[0];
     PROJ=buildProjection(GEO);
     $("ttl").textContent=DATA.titulo||"Atlas electoral de Uruguay";
-    $("elLabel").textContent=ELECCION.label||"";
-    if(ELECCION.demo){ $("demoTag").style.display="inline-block"; }
-    $("src").innerHTML="Fuente: "+esc(ELECCION.fuente||"")+"<br>Mapa base: ECharts (uruguay.geo.json).";
-    renderTabs(); renderMap(); renderLegend();
+    var sel=$("elSel"), hash=location.hash.replace("#","");
+    DATA.elecciones.forEach(function(e,i){ sel.insertAdjacentHTML("beforeend",'<option value="'+i+'">'+esc(e.label)+"</option>"); });
+    var i0=Math.max(0,DATA.elecciones.findIndex(function(e){return e.id===hash;}));
+    sel.value=i0; if(DATA.elecciones.length>1) sel.style.display="inline-block";
+    sel.onchange=function(){ setEleccion(Number(sel.value)); };
+    setEleccion(i0);
   }catch(e){
     $("err").style.display="block";
     $("err").textContent="No se pudo cargar: "+e.message+". Si abriste el archivo con doble clic, serví la carpeta por HTTP (ver README) o subila a GitHub Pages.";
