@@ -1,0 +1,254 @@
+{
+  "titulo": "Atlas electoral de Uruguay",
+  "elecciones": [
+    {
+      "id": "pres2024v1",
+      "label": "Presidencial 2024 · 1ª vuelta",
+      "demo": true,
+      "fuente": "DATOS DE EJEMPLO — no oficiales. Reemplazar con la Corte Electoral.",
+      "partidos": [
+        {
+          "id": "FA",
+          "nombre": "Frente Amplio",
+          "color": "#2a4b9b"
+        },
+        {
+          "id": "PN",
+          "nombre": "Partido Nacional",
+          "color": "#5aa0d6"
+        },
+        {
+          "id": "PC",
+          "nombre": "Partido Colorado",
+          "color": "#e23b3b"
+        },
+        {
+          "id": "CA",
+          "nombre": "Cabildo Abierto",
+          "color": "#3bb6a6"
+        },
+        {
+          "id": "IS",
+          "nombre": "Identidad Soberana",
+          "color": "#8a6fc0"
+        },
+        {
+          "id": "OT",
+          "nombre": "Otros",
+          "color": "#9aa0ad"
+        }
+      ],
+      "departamentos": {
+        "Montevideo": {
+          "habilitados": 1050000,
+          "votos": {
+            "FA": 472500,
+            "PN": 189000,
+            "PC": 132300,
+            "CA": 18900,
+            "IS": 47250,
+            "OT": 85050
+          }
+        },
+        "Canelones": {
+          "habilitados": 430000,
+          "votos": {
+            "FA": 181890,
+            "PN": 92880,
+            "PC": 54180,
+            "CA": 7740,
+            "IS": 19350,
+            "OT": 30960
+          }
+        },
+        "Maldonado": {
+          "habilitados": 170000,
+          "votos": {
+            "FA": 61200,
+            "PN": 52020,
+            "PC": 22950,
+            "CA": 4590,
+            "IS": 6120,
+            "OT": 6120
+          }
+        },
+        "Salto": {
+          "habilitados": 110000,
+          "votos": {
+            "FA": 44550,
+            "PN": 27720,
+            "PC": 13860,
+            "CA": 1980,
+            "IS": 3960,
+            "OT": 6930
+          }
+        },
+        "Colonia": {
+          "habilitados": 105000,
+          "votos": {
+            "FA": 34020,
+            "PN": 37800,
+            "PC": 15120,
+            "CA": 1890,
+            "IS": 2835,
+            "OT": 2835
+          }
+        },
+        "San José": {
+          "habilitados": 100000,
+          "votos": {
+            "FA": 34200,
+            "PN": 34200,
+            "PC": 13500,
+            "CA": 2700,
+            "IS": 2700,
+            "OT": 2700
+          }
+        },
+        "Paysandú": {
+          "habilitados": 95000,
+          "votos": {
+            "FA": 35910,
+            "PN": 26505,
+            "PC": 12825,
+            "CA": 1710,
+            "IS": 3420,
+            "OT": 5130
+          }
+        },
+        "Rivera": {
+          "habilitados": 90000,
+          "votos": {
+            "FA": 30780,
+            "PN": 29160,
+            "PC": 12960,
+            "CA": 1620,
+            "IS": 2430,
+            "OT": 4050
+          }
+        },
+        "Tacuarembó": {
+          "habilitados": 80000,
+          "votos": {
+            "FA": 25200,
+            "PN": 29520,
+            "PC": 10800,
+            "CA": 2160,
+            "IS": 2160,
+            "OT": 2160
+          }
+        },
+        "Soriano": {
+          "habilitados": 75000,
+          "votos": {
+            "FA": 22950,
+            "PN": 28350,
+            "PC": 10125,
+            "CA": 2025,
+            "IS": 2025,
+            "OT": 2025
+          }
+        },
+        "Cerro Largo": {
+          "habilitados": 75000,
+          "votos": {
+            "FA": 24300,
+            "PN": 27000,
+            "PC": 10125,
+            "CA": 2025,
+            "IS": 2025,
+            "OT": 2025
+          }
+        },
+        "Rocha": {
+          "habilitados": 65000,
+          "votos": {
+            "FA": 25155,
+            "PN": 18720,
+            "PC": 7605,
+            "CA": 1755,
+            "IS": 2340,
+            "OT": 2925
+          }
+        },
+        "Artigas": {
+          "habilitados": 63000,
+          "votos": {
+            "FA": 25515,
+            "PN": 16443,
+            "PC": 7371,
+            "CA": 1134,
+            "IS": 2268,
+            "OT": 3969
+          }
+        },
+        "Florida": {
+          "habilitados": 62000,
+          "votos": {
+            "FA": 18972,
+            "PN": 23994,
+            "PC": 8370,
+            "CA": 1674,
+            "IS": 1116,
+            "OT": 1674
+          }
+        },
+        "Durazno": {
+          "habilitados": 55000,
+          "votos": {
+            "FA": 16335,
+            "PN": 21780,
+            "PC": 7425,
+            "CA": 1485,
+            "IS": 990,
+            "OT": 1485
+          }
+        },
+        "Lavalleja": {
+          "habilitados": 55000,
+          "votos": {
+            "FA": 16335,
+            "PN": 21780,
+            "PC": 7425,
+            "CA": 1485,
+            "IS": 990,
+            "OT": 1485
+          }
+        },
+        "Río Negro": {
+          "habilitados": 50000,
+          "votos": {
+            "FA": 18450,
+            "PN": 14850,
+            "PC": 6750,
+            "CA": 900,
+            "IS": 1350,
+            "OT": 2700
+          }
+        },
+        "Treinta y Tres": {
+          "habilitados": 45000,
+          "votos": {
+            "FA": 15390,
+            "PN": 14985,
+            "PC": 5670,
+            "CA": 1215,
+            "IS": 1215,
+            "OT": 2025
+          }
+        },
+        "Flores": {
+          "habilitados": 22000,
+          "votos": {
+            "FA": 6138,
+            "PN": 9108,
+            "PC": 3168,
+            "CA": 396,
+            "IS": 396,
+            "OT": 594
+          }
+        }
+      }
+    }
+  ]
+}
